@@ -1,9 +1,8 @@
 package ptit.dao;
 
-
-import com.bkap.btl_jsp.constants.JSPConstant;
-import com.bkap.btl_jsp.entities.SubjectCore;
-import com.bkap.btl_jsp.utils.DataProvider;
+import ptit.entity.SubjectCore;
+import ptit.enums.ProcedureEnum;
+import ptit.utils.DataProviderUtil;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class SubScoreDao {
     public List<SubjectCore> searchScore(String stuId) {
         List<SubjectCore> list = new ArrayList<>();
         try {
-            resultSet = DataProvider.excuteQuery(JSPConstant.searchScore, stuId);
+            resultSet = DataProviderUtil.excuteQuery(ProcedureEnum.SEARCH_SCORE.getSql(), stuId);
             while (resultSet.next()) {
                 SubjectCore newSubScore = new SubjectCore(resultSet);
                 list.add(newSubScore);
@@ -44,7 +43,7 @@ public class SubScoreDao {
     public List<SubjectCore> findByCondition(int classId, int subId, int type) {
         List<SubjectCore> list = new ArrayList<>();
         try {
-            resultSet = DataProvider.excuteQuery(JSPConstant.subScoreFind, classId, type, subId);
+            resultSet = DataProviderUtil.excuteQuery(ProcedureEnum.FIND_SUBSCORE.getSql(), classId, type, subId);
             while (resultSet.next()) {
                 SubjectCore newSubScore = new SubjectCore(resultSet);
                 list.add(newSubScore);
@@ -57,11 +56,11 @@ public class SubScoreDao {
     }
 
     public boolean add(SubjectCore entity) {
-        return DataProvider.excuteUpdate(JSPConstant.addSubScore,
+        return DataProviderUtil.excuteUpdate(ProcedureEnum.ADD_SUBSCORE.getSql(),
                 entity.getSubjectId(), entity.getStudentId(), entity.getType(), entity.getExam(), entity.getScore()) > 0;
     }
 
     public boolean remote(int subId, String stuId) {
-        return DataProvider.excuteUpdate(JSPConstant.subScoreRemove, subId, stuId) > 0;
+        return DataProviderUtil.excuteUpdate(ProcedureEnum.REMOVE_SUBSCORE.getSql(), subId, stuId) > 0;
     }
 }

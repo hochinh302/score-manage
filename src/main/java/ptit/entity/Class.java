@@ -17,7 +17,7 @@ public class Class {
 
     public Class(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getInt("id");
-        this.name = resultSet.getString("className");
+        this.name = resultSet.getString("name");
         this.status = resultSet.getInt("status");
         this.totalStu = resultSet.getInt("totalStu");
         this.createAt = resultSet.getString("createAt");

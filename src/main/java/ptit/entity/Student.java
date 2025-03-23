@@ -24,6 +24,6 @@ public class Student {
         this.sex = resultSet.getInt("sex");
         this.classId = resultSet.getInt("classId");
         this.birthday = resultSet.getString("birthday");
-        this.className = resultSet.getString("cName");
+        this.className = resultSet.getString("className");
     }
 }
